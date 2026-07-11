@@ -11,16 +11,16 @@ const Customers = () => {
   }, []);
 
   const fetchCustomers = async () => {
-    const res = await axios.get('http://localhost:5000/api/customers');
+    const res = await axios.get('/api/customers');
     setCustomers(res.data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editing) {
-      await axios.put(`http://localhost:5000/api/customers/${editing}`, form);
+      await axios.put(`/api/customers/${editing}`, form);
     } else {
-      await axios.post('http://localhost:5000/api/customers', form);
+      await axios.post('/api/customers', form);
     }
     setForm({ name: '', phone: '', address: '' });
     setEditing(null);
@@ -33,7 +33,7 @@ const Customers = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/customers/${id}`);
+    await axios.delete(`/api/customers/${id}`);
     fetchCustomers();
   };
 

@@ -15,12 +15,12 @@ const Jobs = () => {
   }, []);
 
   const fetchJobs = async () => {
-    const res = await axios.get('http://localhost:5000/api/jobs');
+    const res = await axios.get('/api/jobs');
     setJobs(res.data);
   };
 
   const fetchCustomers = async () => {
-    const res = await axios.get('http://localhost:5000/api/customers');
+    const res = await axios.get('/api/customers');
     setCustomers(res.data);
   };
 
@@ -28,9 +28,9 @@ const Jobs = () => {
     e.preventDefault();
     const data = { ...form, totalCost: Number(form.totalCost), advancePaid: Number(form.advancePaid) };
     if (editing) {
-      await axios.put(`http://localhost:5000/api/jobs/${editing}`, data);
+      await axios.put(`/api/jobs/${editing}`, data);
     } else {
-      await axios.post('http://localhost:5000/api/jobs', data);
+      await axios.post('/api/jobs', data);
     }
     setForm({
       customer: '', workType: '', materialDetails: '', totalCost: '', advancePaid: '', startDate: '', deliveryDate: '', status: 'Pending'
@@ -54,7 +54,7 @@ const Jobs = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/jobs/${id}`);
+    await axios.delete(`/api/jobs/${id}`);
     fetchJobs();
   };
 

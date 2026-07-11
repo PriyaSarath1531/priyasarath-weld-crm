@@ -7,7 +7,7 @@ const Reports = () => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
 
   const fetchSummary = useCallback(async () => {
-    const res = await axios.get(`http://localhost:5000/api/finance/summary/${year}/${month}`);
+    const res = await axios.get(`/api/finance/summary/${year}/${month}`);
     setSummary(res.data);
   }, [year, month]);
 

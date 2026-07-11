@@ -13,9 +13,9 @@ const Dashboard = () => {
   const fetchStats = async () => {
     try {
       const [customersRes, jobsRes, financeRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/customers'),
-        axios.get('http://localhost:5000/api/jobs'),
-        axios.get(`http://localhost:5000/api/finance/summary/${new Date().getFullYear()}/${new Date().getMonth() + 1}`)
+        axios.get('/api/customers'),
+        axios.get('/api/jobs'),
+        axios.get(`/api/finance/summary/${new Date().getFullYear()}/${new Date().getMonth() + 1}`)
       ]);
       setStats({
         totalCustomers: customersRes.data.length,
@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const fetchRecentJobs = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/jobs');
+      const res = await axios.get('/api/jobs');
       setRecentJobs(res.data.slice(0, 5));
     } catch (err) {
       console.error(err);

@@ -12,24 +12,24 @@ const Quotations = () => {
   }, []);
 
   const fetchQuotations = async () => {
-    const res = await axios.get('http://localhost:5000/api/quotations');
+    const res = await axios.get('/api/quotations');
     setQuotations(res.data);
   };
 
   const fetchCustomers = async () => {
-    const res = await axios.get('http://localhost:5000/api/customers');
+    const res = await axios.get('/api/customers');
     setCustomers(res.data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/quotations', { ...form, estimatedCost: Number(form.estimatedCost) });
+    await axios.post('/api/quotations', { ...form, estimatedCost: Number(form.estimatedCost) });
     setForm({ customer: '', workDetails: '', estimatedCost: '' });
     fetchQuotations();
   };
 
   const handleConvert = async (id) => {
-    await axios.post(`http://localhost:5000/api/quotations/${id}/convert`);
+    await axios.post(`/api/quotations/${id}/convert`);
     fetchQuotations();
   };
 

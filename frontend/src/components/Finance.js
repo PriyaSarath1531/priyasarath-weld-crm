@@ -12,19 +12,19 @@ const Finance = () => {
   }, []);
 
   const fetchExpenses = async () => {
-    const res = await axios.get('http://localhost:5000/api/finance/expenses');
+    const res = await axios.get('/api/finance/expenses');
     setExpenses(res.data);
   };
 
   const fetchSummary = async () => {
     const now = new Date();
-    const res = await axios.get(`http://localhost:5000/api/finance/summary/${now.getFullYear()}/${now.getMonth() + 1}`);
+    const res = await axios.get(`/api/finance/summary/${now.getFullYear()}/${now.getMonth() + 1}`);
     setSummary(res.data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/finance/expenses', { ...form, amount: Number(form.amount) });
+    await axios.post('/api/finance/expenses', { ...form, amount: Number(form.amount) });
     setForm({ description: '', amount: '', category: 'Other' });
     fetchExpenses();
     fetchSummary();
