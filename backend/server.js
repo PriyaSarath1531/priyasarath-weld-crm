@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const User = require('./models/User');
 
 // Load environment variables
 dotenv.config();
@@ -14,7 +15,15 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/weldcrm')
-.then(() => console.log('MongoDB connected'))
+.then(async () => {
+  console.log('MongoDB connected');
+  try {
+    await User.collection.dropIndex('contactNumber_1');
+    console.log('Removed obsolete contactNumber index');
+  } catch (error) {
+    if (error.code !== 27) console.error('Unable to remove obsolete contactNumber index:', error.message);
+  }
+})
 .catch(err => console.log(err));
 
 // Routes
